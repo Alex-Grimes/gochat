@@ -32,22 +32,27 @@ func reader(conn *websocket.Conn) {
 	}
 }
 
-func serveWsw(w http.ResponseWriter, r *http.Request) {
+func serveWs(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println(r.Host)
 
-	ws, err := nil
+	ws, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		log.Println(err)
+	}
 
+	reader(ws)
 }
 
 func setupRoutes() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, "Simple Server")
 	})
+	http.HandleFunc("/ws", serveWs)
 }
 
 func main() {
-
+	fmt.Println("Chat APp v0.01")
 	setupRoutes()
 	http.ListenAndServe(":8080", nil)
 }
