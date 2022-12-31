@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/alex-grimes/go-chat/pkg/websocket"
+	"github.com/alex-grimes/gochat/pkg/websocket"
 )
 
 func serveWs(w http.ResponseWriter, r *http.Request) {
