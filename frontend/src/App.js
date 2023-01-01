@@ -16,7 +16,7 @@ function App() {
       console.log(chatHistory)
     });
   
-  }, [chatHistory])
+  }, [])
 
   const send = (e) =>
     {
